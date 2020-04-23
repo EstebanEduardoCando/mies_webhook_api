@@ -14,7 +14,7 @@
     "dialogflow": "^1.2.0",
     "dialogflow-fulfillment": "^0.6.1",
     "morgan": "^1.10.0",
-    "oracledb": "^4.2.0"
+    "oracledb": "4.0.0"
   },
   "devDependencies": {
     "body-parser": "^1.19.0",
