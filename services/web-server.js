@@ -5,12 +5,20 @@ const webServerConfig = require('../config/web-server.js');
 const database = require('./database.js');
 const morgan = require('morgan');
 const router = require('./router.js');
+const ngrok = require('ngrok');
  
 let httpServer;
  
 function initialize() {
   return new Promise((resolve, reject) => {
+
+    /*(async function () {
+      const url = await ngrok.connect(3000);
+      console.log(url);
+    })();*/
+
     const app = express();
+    app.use(express.json());
     httpServer = http.createServer(app);
     app.use(morgan('combined'));
     app.use('/api', router);
