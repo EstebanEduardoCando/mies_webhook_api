@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "mocha --exit test/*.test.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Esteban Cando",
   "license": "ISC",
   "dependencies": {
     "actions-on-google": "^2.12.0",
