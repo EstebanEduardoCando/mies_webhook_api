@@ -13,4 +13,8 @@
 
 # [START gae_quickstart_yaml]
 runtime: nodejs10
+instance_class: F2
+
+env_variables:
+  NODE_ENV: production
 # [END gae_quickstart_yaml]
