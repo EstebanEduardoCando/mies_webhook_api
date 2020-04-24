@@ -24,9 +24,8 @@
     "dialogflow": "^1.2.0",
     "dialogflow-fulfillment": "^0.6.1",
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
+    "morgan": "^1.10.0",
     "ngrok": "^3.2.7"
-  }
+  },
+  "devDependencies": {}
 }
