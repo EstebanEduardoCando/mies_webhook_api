@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "mocha --exit test/*.test.js",
-    "gcp-build": "npm run postinstall"
+    "test": "mocha --exit test/*.test.js"
   },
   "keywords": [],
   "author": "Esteban Cando",
