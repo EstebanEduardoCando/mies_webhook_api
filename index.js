@@ -1,14 +1,13 @@
 const webServer = require('./services/web-server.js');
 const dbConfig = require('./config/database.js');
-//const database = require('./services/database.js');
-const defaultThreadPoolSize = 4;
-process.env.UV_THREADPOOL_SIZE = dbConfig.hrPool.poolMax + defaultThreadPoolSize;
+const database = require('./services/database.js');
+
 
 
 async function startup() {
     try {
         console.log('Initializing database module');
-        //await database.initialize(); 
+        await database.initialize(); 
       } catch (err) {
         console.error(err); 
         process.exit(1); // Non-zero failure code

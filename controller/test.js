@@ -1,19 +1,13 @@
- //const employees = require('../db_apis/employees.js');
- 
+const database = require("../services/database.js");
+
 async function get(req, res, next) {
   try {
-    const context = {};
- 
-    //context.id = parseInt(req.params.id, 10);
- 
-    const rows = 88;
- 
+    const context = await database.listDatabases();
 
-    res.status(200).json(rows);
-
+    res.status(200).json(context);
   } catch (err) {
     next(err);
   }
 }
- 
+
 module.exports.get = get;
