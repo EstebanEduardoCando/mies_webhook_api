@@ -11,7 +11,6 @@ async function initialize() {
 }
 
 async function listDatabases() {
-  await client.connect();
   databasesList = await client.db().admin().listDatabases();
 
   console.log("Databases:");
@@ -20,5 +19,29 @@ async function listDatabases() {
   return databasesList.databases;
 }
 
+async function findOneListingByObject(object, db_name, db_collection) {
+  result = await client.db(db_name).collection(db_collection).findOne(object);
+
+  if (result) {
+    console.log(`Found a listing in the collection with the name '${object}':`);
+    return result;
+  } else {
+    console.log(`No listings found with the name '${object}'`);
+  }
+}
+
+async function findListByObject(object, db_name, db_collection) {
+  result = await client.db(db_name).collection(db_collection).find(object);
+
+  if (result) {
+    console.log(`Found a listing in the collection with the name '${object}':`);
+    return result.toArray();
+  } else {
+    console.log(`No listings found with the name '${object}'`);
+  }
+}
+
+module.exports.findListByObject = findListByObject;
+module.exports.findOneListingByName = findOneListingByObject;
 module.exports.listDatabases = listDatabases;
 module.exports.initialize = initialize;
