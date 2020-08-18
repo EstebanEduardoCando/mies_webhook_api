@@ -10,10 +10,10 @@ let httpServer;
 
 function initialize() {
   return new Promise((resolve, reject) => {
-    /*(async function () {
+    (async function () {
       const url = await ngrok.connect(3000);
       console.log(url);
-    })();*/
+    })();
 
     const app = express();
     app.use(express.json());

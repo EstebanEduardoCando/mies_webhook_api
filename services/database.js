@@ -31,7 +31,7 @@ async function findOneListingByObject(object, db_name, db_collection) {
 }
 
 async function findListByObject(object, db_name, db_collection) {
-  result = await client.db(db_name).collection(db_collection).find(object);
+  result =  client.db(db_name).collection(db_collection).find(object);
 
   if (result) {
     console.log(`Found a listing in the collection with the name '${object}':`);
