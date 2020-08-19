@@ -1,4 +1,5 @@
 const database = require("../services/database.js");
+const { response } = require("express");
 
 
 async function findCollection(baseName, colletionName,objectToFind) {
@@ -30,18 +31,22 @@ async function findCollection(baseName, colletionName,objectToFind) {
 
   async function createAnswerVerificarDigito(array) {
     try {
- let respuesta="";
+
+      let respuesta = new Array;
+      respuesta.push("Ya hemos validado la informacion")
       if (array.length>0) {
         
         array.forEach(element =>  
           {
-            respuesta = respuesta + "Tu bono " + element.nombreBono + " de " + element.bono + " esta listo para ser retirado en nuestras agencias. \n"
+            respuesta.push("Tu bono " + element.nombreBono + " de " + element.bono + " esta listo para ser retirado en nuestras agencias. \n")
           });
 
           return respuesta;
 
       } else {
-        return "No tienes ningun bono activo"
+        respuesta.push("No tienes ningun bono activo")
+
+        return respuesta
       }
 
  
@@ -51,7 +56,40 @@ async function findCollection(baseName, colletionName,objectToFind) {
   }
 
 
+  async function createAnswervalidateCity(array) {
+    try {
+      
+      let respuesta = new Array;
+      respuesta.push("Tenemos " + array.length + " lugar(es) cerca que podrian ayudarte.")
+
+      if (array.length>0) {
+        
+        array.forEach(element =>  
+          {
+            respuesta.push("En la Ciudad de "+ element.Ciudad+", puedes dirigirte a la avenida: " + element.direccion + " ")
+          });
+
+          return respuesta;
+
+      }if (array.length==0){
+        respuesta.push("No existe un lugar de cobro con esos valores ingresados.")
+        return respuesta
+      }
+
+ 
+    } catch (err) {
+      next(err);
+    }
+  }
+
+ 
+
+
+
+
+
   
 module.exports.findCollection = findCollection;
 module.exports.validateNumber = validateNumber;
 module.exports.createAnswerVerificarDigito = createAnswerVerificarDigito;
+module.exports.createAnswervalidateCity = createAnswervalidateCity;

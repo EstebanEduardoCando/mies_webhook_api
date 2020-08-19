@@ -1,6 +1,8 @@
 const database = require("../services/database.js");
 const utils = require("../utils/utils.js");
-const {Text} = require('dialogflow-fulfillment');
+let facebookAnswer = require("../models/facebookAnswer.js");
+let FacebookAnswer = facebookAnswer.FacebookAnswer;
+
 
 
 async function findName(req, res, next) {
@@ -17,31 +19,18 @@ async function findName(req, res, next) {
     try {
       
       myObj = new Object()
-      myObj.cedula = "1718908229";
-      //const result = await database.findListByObject(myObj,"MIES","cedula");
+      myObj.cedula = req.body.queryResult.outputContexts[0].parameters.cedula;
       const result = await  utils.findCollection("MIES","cedula",myObj);
-      const esValido =  await utils.validateNumber(result,req.body.queryResult.outputContexts[0].parameters.cedula, req.body.queryResult.outputContexts[0].parameters.number);
-      const respuesta = await utils.createAnswerVerificarDigito(esValido);
+      const esValido =  await utils.validateNumber(result,req.body.queryResult.outputContexts[0].parameters.cedula, req.body.queryResult.outputContexts[0].parameters.digito);
+      let myrespuesta;
 
-      
-
-      const resp_facebook =   {
-        "fulfillmentText": "Text response",
-        "fulfillmentMessages": [
-          {
-            "text": {
-              "text":  [respuesta]
-            },
-            "platform": "FACEBOOK"
-          }
-        ]
+      if(esValido.length>0){
+        const respuesta = await utils.createAnswerVerificarDigito(esValido);
+        myrespuesta = new FacebookAnswer("FACEBOOK",respuesta);
+      }else{
+        myrespuesta = new FacebookAnswer("FACEBOOK",["Tu digito verificador no concuerda. Ingresa otra cedula."]);
       }
-
-
-      
-    
-
-      res.json(resp_facebook);
+      res.json(myrespuesta).end();   
       
 
     } catch (err) {
