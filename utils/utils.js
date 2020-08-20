@@ -122,8 +122,8 @@ async function findCollection(baseName, colletionName,objectToFind) {
           botones = new Array;
           var detalleBoton = new Object();
           detalle.title=element.nombre
-          detalle.subtitle=element.descripcion.substr(0,15) + "..."
-          detalle.imageUri="https://stock.rtl.lu/rtl/800/rtl2008.lu/nt/p/2020/04/09/16/fdfbf19dc86cb2ef05908e9e83885f97.png" 
+          detalle.subtitle=element.descripcion.substr(0,20) + "..."
+          detalle.imageUri=element.link
           detalleBoton.text= element.nombre
           botones.push(detalleBoton)
           detalle.buttons=botones;
