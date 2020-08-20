@@ -14,7 +14,7 @@ async function findName(req, res, next) {
     }
   }
 
-  async function validateCity(req, res, next) {
+  async function validateCity(req, res, next,agent) {
     try {
       myObj = new Object()
       myObj.provincia = req.body.queryResult.outputContexts[0].parameters.provincias_ecuador;
@@ -23,7 +23,8 @@ async function findName(req, res, next) {
       const result = await  utils.findCollection("MIES","LugaresCobro",myObj);
       const respuesta = await utils.createAnswervalidateCity(result);
 
-      let myrespuesta = new FacebookAnswer("FACEBOOK",respuesta);
+      let myrespuesta = new FacebookAnswer("FACEBOOK","Texto",respuesta);
+      
       res.json(myrespuesta).end();
     } catch (err) {
       next(err);

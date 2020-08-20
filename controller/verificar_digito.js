@@ -15,7 +15,7 @@ async function findName(req, res, next) {
     }
   }
 
-  async function validateNumber(req, res, next) {
+  async function validateNumber(req, res, next,agent) {
     try {
       
       myObj = new Object()
@@ -26,9 +26,9 @@ async function findName(req, res, next) {
 
       if(esValido.length>0){
         const respuesta = await utils.createAnswerVerificarDigito(esValido);
-        myrespuesta = new FacebookAnswer("FACEBOOK",respuesta);
+        myrespuesta = new FacebookAnswer("FACEBOOK","Texto",respuesta);
       }else{
-        myrespuesta = new FacebookAnswer("FACEBOOK",["Tu digito verificador no concuerda. Ingresa otra cedula."]);
+        myrespuesta = new FacebookAnswer("FACEBOOK","Texto",["Tu digito verificador no concuerda. Ingresa otra cedula."]);
       }
       res.json(myrespuesta).end();   
       
