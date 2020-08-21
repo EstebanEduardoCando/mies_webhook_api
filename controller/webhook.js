@@ -3,6 +3,7 @@ const { Card, Suggestion } = require("dialogflow-fulfillment");
 const verificar_digito = require("../controller/verificar_digito.js");
 const select_city = require("../controller/select_city.js");
 const select_program = require("../controller/select_program.js");
+const select_document = require("../controller/select_document.js");
 
 
 async function post(request, response , next) {
@@ -19,6 +20,9 @@ async function post(request, response , next) {
         break;
       case "3otros.bonos - select.program":
         select_program.findProgram(request, response ,next, agent);
+        break;
+      case "6tramites - select.document":
+        select_document.findDocument(request, response ,next, agent);
         break;
     }
 

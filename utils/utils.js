@@ -140,6 +140,33 @@ async function findCollection(baseName, colletionName,objectToFind) {
   }
 
 
+  async function createAnswerSelectDocument(array) {
+    try {
+      
+      let respuesta = new Array;
+
+      if (array.length>0) {
+        respuesta.push("Hemos encontrado esta información que puede ayudarte")
+        array.forEach(element =>  
+          {
+            respuesta.push(element.nombreCompleto)
+            respuesta.push(element.descripcion)
+            respuesta.push(element.link)
+          });
+
+          return respuesta;
+
+      }if (array.length==0){
+        respuesta.push("No existe un programa asociado a esa busqueda")
+        return respuesta
+      }
+
+ 
+    } catch (err) {
+      next(err);
+    }
+  }
+
 
   
 
@@ -154,3 +181,5 @@ module.exports.createAnswerVerificarDigito = createAnswerVerificarDigito;
 module.exports.createAnswervalidateCity = createAnswervalidateCity;
 module.exports.createAnswerSelectProgram = createAnswerSelectProgram;
 module.exports.createCardsPrograms = createCardsPrograms;
+module.exports.createAnswerSelectDocument = createAnswerSelectDocument;
+
